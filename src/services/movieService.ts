@@ -18,12 +18,12 @@ interface MoviedbResponse {
   total_results: number;
 }
 
-export const fetchMovies = async (query: string): Promise<Movie[]> => {
-  const response = await api.get<MoviedbResponse>(
+export const fetchMovies = async (query: string, page: number): Promise<MoviedbResponse> => {
+  const {data} = await api.get<MoviedbResponse>(
     "/3/search/movie",
     {
-      params: { query }
-    }
+      params: {query, page},
+    },
   );
-  return response.data.results;
+  return data;
 };
